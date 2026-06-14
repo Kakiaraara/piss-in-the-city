@@ -334,20 +334,20 @@ function setupQRGenerator() {
 
   if (!inputTunnelUrl || !qrDisplay) return;
 
-  inputTunnelUrl.addEventListener('input', () => {
-    let val = inputTunnelUrl.value.trim();
-    if (!val) {
+  function generateQR(val) {
+    let urlVal = val.trim();
+    if (!urlVal) {
       qrDisplay.innerHTML = `<span style="font-size: 0.6rem; color: var(--text-secondary); text-align: center; padding: 5px; line-height: 1.3;">URLをペーストすると<br>自動でQRコードが<br>生成されます</span>`;
       return;
     }
     
     // Auto-prepend https:// if missing
-    if (!/^https?:\/\//i.test(val)) {
-      val = 'https://' + val;
+    if (!/^https?:\/\//i.test(urlVal)) {
+      urlVal = 'https://' + urlVal;
     }
     
     try {
-      const url = new URL(val);
+      const url = new URL(urlVal);
       // Append target path if not specified
       if (url.pathname === '/' || url.pathname === '') {
         url.pathname = '/ar.html';
@@ -366,5 +366,14 @@ function setupQRGenerator() {
     } catch (e) {
       qrDisplay.innerHTML = `<span style="font-size: 0.7rem; color: #ef4444; text-align: center; padding: 10px;">有効なURLを<br>入力してください</span>`;
     }
+  }
+
+  // Auto-detect current host (localhost, LAN IP, or Render production domain) on load
+  const initialUrl = window.location.origin;
+  inputTunnelUrl.value = initialUrl;
+  generateQR(initialUrl);
+
+  inputTunnelUrl.addEventListener('input', () => {
+    generateQR(inputTunnelUrl.value);
   });
 }
