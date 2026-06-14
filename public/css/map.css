@@ -128,19 +128,20 @@
   border-radius: 8px;
   text-align: center;
 }
-
 .stat-val {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.35rem;
+  font-weight: 800;
   color: var(--accent-blue);
   text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
 }
 
 .stat-lbl {
-  font-size: 0.62rem;
-  color: var(--text-secondary);
+  font-size: 0.68rem;
+  color: #ffffff;
+  font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* Scrollable recent list feed */
@@ -171,24 +172,28 @@
 }
 
 .feed-time {
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   color: var(--accent-cyan);
+  font-weight: 600;
   margin-bottom: 2px;
   display: flex;
   justify-content: space-between;
 }
 
 .feed-desc {
-  color: var(--text-primary);
-  font-weight: 500;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.82rem;
   margin-bottom: 4px;
 }
 
 .feed-meta {
-  color: var(--text-secondary);
-  font-size: 0.65rem;
+  color: #e6e2da;
+  font-size: 0.7rem;
+  font-weight: 500;
   font-family: monospace;
 }
+
 
 @keyframes slide-in {
   from {
@@ -228,6 +233,11 @@
   box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
 }
 
+/* Gently tune tile brightness/contrast to make neon elements pop while keeping street labels super clear */
+.leaflet-tile {
+  filter: brightness(0.9) contrast(1.1) saturate(0.85) !important;
+}
+
 /* Glowing GPS Ripple Pin overlay inside Leaflet */
 .ripple-marker {
   position: absolute;
@@ -243,8 +253,8 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 2px solid var(--accent-blue);
-  box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+  border: 3px solid #ff3300; /* Vivid neon orange-red for strong contrast */
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(255, 51, 0, 0.4);
   pointer-events: none;
   animation: map-ripple 2.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
@@ -257,7 +267,8 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1.5px solid var(--accent-cyan);
+  border: 2px solid #ffaa00; /* Amber-yellow ripple secondary */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   pointer-events: none;
   animation: map-ripple 2.5s cubic-bezier(0.1, 0.8, 0.3, 1) 0.5s forwards;
 }
@@ -265,13 +276,14 @@
 /* Core glowing core bubble pin */
 .ripple-core {
   position: absolute;
-  top: -6px;
-  left: -6px;
-  width: 12px;
-  height: 12px;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background-color: var(--accent-blue);
-  box-shadow: 0 0 8px var(--accent-blue);
+  background-color: #ffee00;
+  border: 2px solid #000000;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   pointer-events: none;
 }
 
@@ -279,10 +291,10 @@
   0% {
     transform: scale(0.05);
     opacity: 1;
-    border-color: var(--accent-blue);
+    border-color: #ff3300;
   }
   50% {
-    border-color: var(--accent-cyan);
+    border-color: #ffaa00;
   }
   100% {
     transform: scale(1.5);
@@ -290,3 +302,9 @@
     border-color: transparent;
   }
 }
+
+/* Persistent urination points (glowing yellow circle markers with shadow) */
+.glowing-point {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.85));
+}
+

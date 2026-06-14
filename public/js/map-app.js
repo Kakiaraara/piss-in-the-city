@@ -40,8 +40,9 @@ function initMap() {
 
   L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 20
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 }
 
@@ -153,11 +154,11 @@ function triggerMapRippleAnimation(lat, lng) {
 // Places a small permanent neon-gold point representing urination trace absorbed
 function addPersistentPointOnMap(drop) {
   const marker = L.circleMarker([drop.latitude, drop.longitude], {
-    radius: 6,
-    color: 'var(--accent-blue)',
-    fillColor: '#ffcc00',
-    fillOpacity: 0.8,
-    weight: 2,
+    radius: 9,
+    color: '#000000',
+    fillColor: '#ffee00',
+    fillOpacity: 1.0,
+    weight: 3.5,
     className: 'glowing-point'
   }).addTo(map);
 
