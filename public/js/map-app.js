@@ -336,7 +336,7 @@ function setupQRGenerator() {
   inputTunnelUrl.addEventListener('input', () => {
     let val = inputTunnelUrl.value.trim();
     if (!val) {
-      qrDisplay.innerHTML = `<span style="font-size: 0.7rem; color: var(--text-secondary); text-align: center; padding: 10px; line-height: 1.4;">URLをペーストすると<br>自動でQRコードが<br>生成されます</span>`;
+      qrDisplay.innerHTML = `<span style="font-size: 0.6rem; color: var(--text-secondary); text-align: center; padding: 5px; line-height: 1.3;">URLをペーストすると<br>自動でQRコードが<br>生成されます</span>`;
       return;
     }
     
@@ -355,11 +355,11 @@ function setupQRGenerator() {
       const targetUrl = url.toString();
       
       // Request theme-colored QR Code (neon-urine gold on dark background)
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&color=ffcc00&bgcolor=080705&data=${encodeURIComponent(targetUrl)}`;
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&color=ffcc00&bgcolor=080705&data=${encodeURIComponent(targetUrl)}`;
       
       qrDisplay.innerHTML = `
         <a href="${targetUrl}" target="_blank" title="PC上でもARシミュレータを開く" style="display: block;">
-          <img src="${qrApiUrl}" alt="QR Code" style="display: block; width: 130px; height: 130px; border-radius: 4px; border: 1px solid rgba(255, 204, 0, 0.25); box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);">
+          <img src="${qrApiUrl}" alt="QR Code" style="display: block; width: 100px; height: 100px; border-radius: 4px; border: 1px solid rgba(255, 204, 0, 0.25); box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);">
         </a>
       `;
     } catch (e) {
