@@ -1,0 +1,16 @@
+{
+  "name": "web-ar-water-map",
+  "version": "1.0.0",
+  "description": "Interactive Web AR Water Dripping Map System for Media Art",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.16.0"
+  },
+  "author": "Antigravity",
+  "license": "MIT"
+}

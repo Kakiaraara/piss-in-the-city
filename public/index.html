@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PISS IN THE CITY // 都市における放尿 — メディアアート</title>
+  <meta name="description" content="都市のインフラから排除されつつある身体的痕跡「放尿」をWeb ARで再現し、都市と身体の関係を可視化するコラボレーティブ・マッピング。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 204, 0, 0.15), rgba(255, 234, 0, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+      z-index: 1;
+      animation: float-bubble 8s infinite ease-in-out;
+    }
+    @keyframes float-bubble {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-40px) scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="portal-container">
+    <div class="bubble animate-float" style="width: 80px; height: 80px; top: 15%; left: 10%; animation-duration: 6s;"></div>
+    <div class="bubble animate-float" style="width: 120px; height: 120px; bottom: 15%; right: 10%; animation-duration: 9s;"></div>
+    <div class="bubble animate-float" style="width: 50px; height: 50px; top: 70%; left: 20%; animation-duration: 5s;"></div>
+
+    <div class="portal-card glass">
+      <div class="animate-float" style="margin-bottom: 20px;">
+        <span style="font-size: 3.2rem; filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.5));">🟡</span>
+      </div>
+      <h1 class="portal-title" style="font-size: 2.2rem;">PISS IN THE CITY</h1>
+      <p class="portal-subtitle" style="color: var(--accent-cyan); font-weight: 500; font-family: var(--font-heading); margin-bottom: 8px;">都市における放尿</p>
+      <p class="portal-subtitle" style="font-size: 0.9rem; max-width: 480px; margin: 0 auto 30px auto; color: var(--text-secondary);">
+        管理・消毒された都市インフラから排除された身体的排泄行為をARで野性的に再生し、かつての身体的痕跡を地図上にマッピングするコラボレーティブ・メディアアート。
+      </p>
+      
+      <div class="portal-options">
+        <a href="ar.html" class="portal-option-card glass">
+          <div class="icon-box">📱</div>
+          <div>
+            <h3>Web AR で放尿する</h3>
+            <p>都市空間に、放物線を描く生々しい小便（黄金の飛沫）を放ちます。放尿時の心理・独白をテキストとして入力し、その位置に堆積させます。</p>
+          </div>
+        </a>
+        
+        <a href="map.html" class="portal-option-card glass">
+          <div class="icon-box">🗺️</div>
+          <div>
+            <h3>リアルタイム放尿マップ</h3>
+            <p>人々が都市のどこで放尿し、何を考えていたのか。その精神的・肉体的痕跡を、地図上の生々しい波紋と独白（ログ）としてリアルタイムに観察します。</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="portal-footer">
+      <p>PISS IN THE CITY Media Art Project © 2026 // Antigravity</p>
+    </div>
+  </div>
+</body>
+</html>

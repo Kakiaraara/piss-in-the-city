@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>PISS IN THE CITY // WEB AR CLIENT</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/ar.css">
+  <!-- Load Three.js from unpkg for standard 3D rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <!-- Start Screen Overlay (To unlock Web Audio & Request Camera/GPS) -->
+  <div id="start-screen">
+    <div class="start-card glass">
+      <div style="font-size: 2.8rem; filter: drop-shadow(0 0 12px rgba(255,204,0,0.5));">🟡</div>
+      <h2>WEB AR 放尿体験</h2>
+      <p class="portal-subtitle" style="margin-bottom: 10px; color: var(--accent-cyan); font-weight: 500;">PISS IN THE CITY</p>
+      
+      <div class="start-instructions">
+        <strong>体験に必要な権限について:</strong>
+        <ul>
+          <li><strong>カメラ権限:</strong> 背景に現実の都市空間を投影するために使用します。（※拒否した場合はバーチャル空間モードになります）</li>
+          <li><strong>位置情報 (GPS):</strong> あなたが放尿した場所と独白をリアルタイムマップに刻むために使用します。</li>
+        </ul>
+      </div>
+
+      <button id="btn-start-ar" class="btn-neon interactive">
+        体験を開始する
+      </button>
+      
+      <a href="index.html" class="btn-back interactive">ポータルに戻る</a>
+    </div>
+  </div>
+
+  <!-- Thought Input Modal Overlay (Fades in when screen is tapped / trigger clicked) -->
+  <div id="thought-modal" class="modal-overlay">
+    <div class="thought-card glass">
+      <h3>💭 独白の埋め込み</h3>
+      <label for="input-thought">
+        都市におけるこの排泄の瞬間、あなたは<strong>何を考えていましたか？</strong><br>
+        （独白、感情、理由、周囲の状況などを自由に記述してください）
+      </label>
+      <textarea id="input-thought" class="thought-input" placeholder="例：終電を逃し、管理された社会から一瞬だけ解放された気分だった / 誰もいない高架下の暗闇に、自分の身体の一部を刻みつけた..."></textarea>
+      <div style="display: flex; gap: 10px; justify-content: flex-end; width: 100%;">
+        <button id="btn-cancel-thought" class="btn-back interactive" style="padding: 10px 20px;">✕ キャンセル</button>
+        <button id="btn-submit-thought" class="btn-neon interactive" style="padding: 10px 24px; font-weight: 600;">⚡ 放出する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen AR Environment Container -->
+  <div id="ar-container">
+    <!-- Camera stream behind canvas -->
+    <video id="camera-stream" autoplay playsinline muted></video>
+    <!-- WebGL Canvas for Three.js overlay -->
+    <canvas id="webgl-canvas"></canvas>
+  </div>
+
+  <!-- Toast Notification Panel -->
+  <div id="toast" class="toast">放尿の痕跡が空間に染み込み、マップに反映されました。</div>
+
+  <!-- HUD top overlays -->
+  <div class="ar-overlay" id="ar-hud-top">
+    <a href="index.html" class="btn-back interactive" style="backdrop-filter: blur(10px); padding: 8px 12px;">✕ 終了</a>
+    
+    <!-- GPS Coordinates Display Panel -->
+    <div class="hud-panel glass interactive">
+      <div class="gps-title">
+        <span id="gps-status-dot" class="status-dot"></span>
+        <span id="gps-status-text">GPS: 接続中...</span>
+      </div>
+      <div id="gps-coordinates" class="gps-coords">
+        LAT: --.-----<br>
+        LNG: --.-----
+      </div>
+      
+      <!-- Mock Coordinate inputs for Desktop/Simulated tests -->
+      <div id="mock-gps-panel" style="display: none;">
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 6px 0;">
+        <label>PCテスト用擬似座標:</label>
+        <div style="display: flex; gap: 4px; align-items: center;">
+          <input type="number" id="mock-lat" step="0.0001" value="35.6586" style="width: 75px;">
+          <input type="number" id="mock-lng" step="0.0001" value="139.7454" style="width: 75px;">
+        </div>
+        <span style="font-size: 0.65rem; color: var(--accent-cyan);">※値を変えてタップしてください</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD bottom overlays -->
+  <div class="ar-overlay" id="ar-hud-bottom">
+    <div style="text-align: center; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+      画面をタップして放尿位置を決め、独白を入力してください
+    </div>
+    <button id="btn-trigger-drip" class="btn-neon interactive" style="padding: 16px 36px; border-radius: 40px; font-size: 1.1rem; box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);">
+      💧 放尿する
+    </button>
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="js/ar-app.js"></script>
+</body>
+</html>

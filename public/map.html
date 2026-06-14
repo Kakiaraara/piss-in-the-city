@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PISS IN THE CITY // REAL-TIME RIPPLE MAP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/map.css">
+  <!-- Leaflet Map CSS and JS CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+  <!-- Fullscreen Map Canvas -->
+  <div id="map-container"></div>
+
+  <!-- HUD Top Header -->
+  <div class="map-hud" id="map-header">
+    <div class="brand-panel glass interactive">
+      <div class="brand-logo" style="display: flex; align-items: center;">
+        <!-- Premium inline golden SVG liquid drop -->
+        <svg viewBox="0 0 30 42" width="22" height="30" style="fill: var(--accent-blue); filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.65));">
+          <path d="M15 3C15 3 27 15.6 27 24C27 30.6 21.6 36 15 36C8.4 36 3 30.6 3 24C3 15.6 15 3 15 3Z"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1 style="font-size: 1.15rem; font-weight: 700; letter-spacing: 0.05em;">PISS IN THE CITY MAP</h1>
+        <p>都市における放尿 — 身体の痕跡と独白のマッピング</p>
+      </div>
+    </div>
+    
+    <a href="index.html" class="btn-back interactive" style="backdrop-filter: blur(10px); padding: 10px 18px;">ポータルに戻る</a>
+  </div>
+
+  <!-- Control Widgets (Floating) -->
+  <div class="map-hud interactive" id="map-controls">
+    <!-- Auto Follow Mode Toggle -->
+    <button id="btn-toggle-follow" class="glass control-btn active" title="最新の放尿地点に自動ズーム">
+      🎯
+    </button>
+    <!-- Ambient Sound Chime Toggle -->
+    <button id="btn-toggle-sound" class="glass control-btn" title="環境音ミュート/解除">
+      🔇
+    </button>
+  </div>
+
+  <!-- Sidebar: Dynamic Telemetry Feed -->
+  <div class="map-hud interactive" id="map-sidebar">
+    <div class="sidebar-panel glass">
+      <div class="panel-header">
+        <span>📊 放尿の集計</span>
+        <span id="socket-status" class="status-dot" style="background-color: var(--text-secondary);"></span>
+      </div>
+      
+      <!-- Network Stats Panel -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div id="stat-total" class="stat-val">0</div>
+          <div class="stat-lbl">総放尿回数</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-volume" class="stat-val">0.0</div>
+          <div class="stat-lbl">総放尿量 (L)</div>
+        </div>
+      </div>
+
+      <div class="panel-header" style="border-top: 1px solid var(--glass-border);">
+        <span>🕒 最近の放尿・独白ログ</span>
+      </div>
+
+      <!-- Scrollable events feed list -->
+      <div class="feed-container" id="events-feed">
+        <!-- Javascript will inject feed-items dynamically here -->
+        <div style="text-align: center; color: var(--text-secondary); margin-top: 20px; font-size: 0.8rem;">
+          放尿を待機中...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Panel for Mobile Connection -->
+  <div class="map-hud interactive glass" id="qr-panel" style="bottom: 20px; left: 80px; width: 220px; padding: 15px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+      <span>📱</span> スマホ接続用 QR
+    </div>
+    <input type="text" id="input-tunnel-url" placeholder="トンネルURLをペースト..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,204,0,0.15); color: white; padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; outline: none; transition: border-color 0.2s;">
+    <div id="qr-display" style="width: 100%; height: 140px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,204,0,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+      <span style="font-size: 0.7rem; color: var(--text-secondary); text-align: center; padding: 10px; line-height: 1.4;">URLをペーストすると<br>自動でQRコードが<br>生成されます</span>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Dashboard Logic -->
+  <script src="js/map-app.js"></script>
+</body>
+</html>
