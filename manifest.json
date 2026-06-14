@@ -1,0 +1,16 @@
+{
+  "name": "PISS IN THE CITY",
+  "short_name": "Piss City",
+  "start_url": "/map.html",
+  "display": "fullscreen",
+  "background_color": "#080705",
+  "theme_color": "#080705",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}
